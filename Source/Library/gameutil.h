@@ -92,11 +92,16 @@ namespace game_framework {
 		
 		/* Unshow the bitmap. */
 		void  UnshowBitmap();
+		void  OnMove();
 
 		/* Setter */
 		void  SetAnimation(int delay, bool _once);
 		void  SetFrameIndexOfBitmap(int frame);
 		void  SetTopLeft(int, int);			// 將圖的左上角座標移至 (x,y)
+		void  SetMovingRight(bool right);	// 向右移動
+		void  SetMovingLeft(bool left);		// 向左移動
+		void  SetMovingDown(bool down);		// 向下移動
+		void  SetMovingUp(bool up);			// 向上移動
 
 		/* Show the bitmap with or without factor. */
 		void  ShowBitmap();					// 將圖貼到螢幕
@@ -123,6 +128,11 @@ namespace game_framework {
 		void  ToggleAnimation();
 
 	protected:
+		bool isMovingLeft;
+		bool isMovingRight;
+		bool isMovingDown;
+		bool isMovingUp;
+
 		//! 當前幀的索引值。
 		int frameIndex = 0;
 		//! 當前幀切換的延遲。
@@ -148,6 +158,7 @@ namespace game_framework {
 	private:
 		void InitializeRectByBITMAP(BITMAP bitmap);
 		void ShowBitmapBySetting();
+		int  step;
 	};
 
 	class CTextDraw {

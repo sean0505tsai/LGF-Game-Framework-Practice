@@ -32,6 +32,11 @@ namespace game_framework {
 	CMovingBitmap::CMovingBitmap()
 	{
 		isBitmapLoaded = false;
+		isMovingLeft = false;
+		isMovingRight = false;
+		isMovingDown = false;
+		isMovingUp = false;
+		step = 10;
 	}
 
 	//! 取得 CMovingBitmap 物件的圖片高度。
@@ -379,6 +384,29 @@ namespace game_framework {
 		CRect rect;
 		BOOL isOverlap = rect.IntersectRect(bmp1.locations[bmp1.GetFrameIndexOfBitmap()], bmp2.locations[bmp2.GetFrameIndexOfBitmap()]);
 		return isOverlap;
+	}
+
+	void CMovingBitmap::SetMovingRight(bool right) {
+		isMovingRight = right;
+	}
+
+	void CMovingBitmap::SetMovingLeft(bool left) {
+		isMovingLeft = left;
+	}
+
+	void CMovingBitmap::SetMovingDown(bool down) {
+		isMovingDown = down;
+	}
+	
+	void CMovingBitmap::SetMovingUp(bool up) {
+		isMovingUp = up;
+	}
+
+	void CMovingBitmap::OnMove() {
+		if (isMovingRight) SetTopLeft(GetLeft() + step, GetTop());
+		if (isMovingLeft) SetTopLeft(GetLeft() - step, GetTop());
+		if (isMovingDown) SetTopLeft(GetLeft(), GetTop() + step);
+		if (isMovingUp) SetTopLeft(GetLeft(), GetTop() - step);
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
